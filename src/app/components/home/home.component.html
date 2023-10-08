@@ -1,0 +1,41 @@
+<!--Start Main Slider -->
+<section>
+    <div class="row my-3">
+        <div class="col-md-9 p-0">
+          <owl-carousel-o [options]="mainSlider">
+            <ng-template carouselSlide>
+              <img src="assets/images/slider-image-1.jpeg" alt="slider-img" class="w-100"  height="450px"/>
+            </ng-template>
+            <ng-template carouselSlide>
+              <img src="assets/images/slider-image-2.jpeg" alt="slider-img" class="w-100" height="450px"
+            /></ng-template>
+            <ng-template carouselSlide>
+              <img src="assets/images/slider-image-3.jpeg" alt="slider-img" class="w-100" height="450px"
+            /></ng-template>
+          </owl-carousel-o>
+        </div>
+        <div class="col-md-3 p-0" >
+          <img src="assets/images/fresh-fruit-berry-.jpg" alt="slider-img" class="w-100" height="225px"/>
+          <img src="assets/images/colorful-fruits.jpg" alt="slider-img" class="w-100" height="225px"/>
+        </div>
+      </div>
+</section>
+<!--End Main Slider -->
+
+
+<!--Start category Slider -->
+<owl-carousel-o [options]="categorySlider">
+
+    <ng-container *ngFor="let slide of categories">
+      <ng-template carouselSlide >
+        <img [src]="slide.image" alt="" height="200px">
+        <h5 class="text-center txt-color">{{slide.name}}</h5>
+      </ng-template>
+    </ng-container>
+
+  </owl-carousel-o>
+<!--End category Slider -->
+
+<!-- Start Products -->
+<app-products></app-products>
+<!-- End Products -->
