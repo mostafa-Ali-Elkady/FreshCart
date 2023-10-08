@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import jwtDecode from "jwt-decode";
 import { Observable, BehaviorSubject } from "rxjs";
+import { __values } from "tslib";
 
 @Injectable({
   providedIn: "root",
@@ -10,17 +11,25 @@ import { Observable, BehaviorSubject } from "rxjs";
 export class AuthService {
 
   userData = new BehaviorSubject(null);
+  userName = new BehaviorSubject(null);
+  userId = new BehaviorSubject(null);
  
   constructor(private _HttpClient: HttpClient, private _Router:Router) {
     if(localStorage.getItem('userToken')!== null){
       this.decodeUserData()
+     
     }
   }
+
+
   decodeUserData(){
     let encodedToken= JSON.stringify(localStorage.getItem('userToken'))
    let decodedeToken:any = jwtDecode(encodedToken);
    this.userData.next(decodedeToken);
+   this.userId.next(decodedeToken.id)
+   this.userName.next(decodedeToken.name);
   }
+
 
   register(userData: object): Observable<any> {
     return this._HttpClient.post(

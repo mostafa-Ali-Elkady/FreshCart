@@ -8,7 +8,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CarouselModule } from "ngx-owl-carousel-o";
 import { CommonModule } from "@angular/common";
 import { ToastrModule } from "ngx-toastr";
-
 @NgModule({
   declarations: [
     AppComponent,

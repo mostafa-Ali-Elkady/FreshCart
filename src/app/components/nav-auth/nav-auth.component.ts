@@ -2,6 +2,7 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import { AuthService } from "src/app/services/auth.service";
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-nav-auth',
@@ -12,7 +13,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class NavAuthComponent {
   isLogin:boolean= false;
-  constructor(private _AuthService:AuthService , private _Renderer2:Renderer2){
+  constructor(private _AuthService:AuthService , private _Renderer2:Renderer2 , private _CartService:CartService){
 
   }
   ngOnInit(): void {
@@ -25,6 +26,7 @@ export class NavAuthComponent {
         }
       }
     })
+    
   }
   logOut() {
     this._AuthService.logOut()

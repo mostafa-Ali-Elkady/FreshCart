@@ -36,18 +36,31 @@ export class ProductsComponent implements OnInit {
       },
     });
   }
-  addToCart(productId: string, element: HTMLButtonElement) {
-    this._Renderer2.setAttribute(element, "disabled", "true");
-    this._CartService.addToCart(productId).subscribe({
+  // Add To wishList
+  addToWishlist(productId: string, element:HTMLElement ) {
+    this._CartService.addToWishlist(productId).subscribe({
       next: (response) => {
         console.log(response);
         this._ToastrService.success(response.message);
-        this._CartService.cartNumber.next(response.numOfCartItems);
-        this._Renderer2.removeAttribute(element, "disabled");
-      },
-      error: (err) => {
-        this._Renderer2.removeAttribute(element, "disabled");
+        this._Renderer2.setStyle(element, "color", "red");
       },
     });
   }
+// Add to cart
+addToCart(productId: string, element: HTMLButtonElement) {
+  this._Renderer2.setAttribute(element, "disabled", "true");
+  this._CartService.addToCart(productId).subscribe({
+    next: (response) => {
+      console.log(response);
+      this._ToastrService.success(response.message);
+      this._CartService.cartNumber.next(response.numOfCartItems);
+      this._Renderer2.removeAttribute(element, "disabled");
+
+    },
+    error: (err) => {
+      this._Renderer2.removeAttribute(element, "disabled");
+    },
+  });
+}
+
 }

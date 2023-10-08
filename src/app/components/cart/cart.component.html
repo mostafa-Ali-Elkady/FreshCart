@@ -1,4 +1,4 @@
-<section class="p-3 shadow rounded my-5 bg-color" *ngIf="cart">
+<section class="p-3 shadow rounded my-5 bg-color" *ngIf="cart; else message">
   <div class="d-flex justify-content-between align-items-center">
     <div class="main-title">
       <h2 class="txt-color">Shop Cart</h2>
@@ -82,7 +82,14 @@
     </div>
     <hr />
   </div>
+  <button role="a"
+    class="btn btn-primary"
+    [routerLink]="['/payment', cart._id]"
+  >
+    <img src="assets/images/visa.svg" alt="visa" width="100px" height="50px" />
+    Pay Now
+  </button>
 </section>
-<div *ngIf="!cart">
+<ng-template #message>
   <p class="p-5 fs-3 text-center fw-bold txt-color">Your Cart Is Empty</p>
-</div>
+</ng-template>

@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -13,14 +14,14 @@ import { AuthService } from "src/app/services/auth.service";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  constructor(private _AuthService:AuthService, private _Router:Router){
+  constructor(private _AuthService:AuthService, private _Router:Router ,private _ToastrService:ToastrService){
     if(localStorage.getItem('userToken') !== null) {
       _Router.navigate(['/home'])
     }
   }
   isLoading:boolean=false;
   apiError:any=null;
-  username:string='';
+  username!:string|null;
   //Form Structure
   loginForm: FormGroup = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
@@ -34,9 +35,20 @@ export class LoginComponent {
         next:(res) => {
           if(res.message === "success") {
             this.isLoading= false
-            this._Router.navigate(['/home']);
             localStorage.setItem("userToken",res.token);
-            this._AuthService.decodeUserData()
+            this._AuthService.decodeUserData();
+            this._AuthService.userName.subscribe({
+              next:(data)=> {
+                this.username=data;
+                if(this.username !== null) {
+                  this._ToastrService.success(` welcome ${this.username}`)
+                 }else {
+                  this._ToastrService.success(` welcome Back`)
+                 }
+              }
+            })
+            this._Router.navigate(['/home']);
+
           }
         },
         error:(err) => {

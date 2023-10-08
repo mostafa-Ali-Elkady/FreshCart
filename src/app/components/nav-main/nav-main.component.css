@@ -10,3 +10,11 @@
 .navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
     color: var(--txt) !important;
 }
+.username {
+    top: -15px;
+    left: -20px;
+}
+.cart {
+    top: 50%;
+    left: 64%;
+}

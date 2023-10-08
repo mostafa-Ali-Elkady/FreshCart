@@ -18,7 +18,7 @@ const routes: Routes = [
           import("./components/home/home.component").then(
             (m) => m.HomeComponent
           ),
-        title: "home",
+        title: "Home",
       },
       {
         path: "cart",
@@ -26,7 +26,7 @@ const routes: Routes = [
           import("./components/cart/cart.component").then(
             (m) => m.CartComponent
           ),
-        title: "cart",
+        title: "Cart",
       },
       {
         path: "products",
@@ -34,7 +34,7 @@ const routes: Routes = [
           import("./components/products/products.component").then(
             (m) => m.ProductsComponent
           ),
-        title: "products",
+        title: "Products",
       },
       {
         path: "product-details/:id",
@@ -42,7 +42,7 @@ const routes: Routes = [
           import("./components/product-details/product-details.component").then(
             (m) => m.ProductDetailsComponent
           ),
-        title: "products",
+        title: "Products Details",
       },
       {
         path: "categories",
@@ -58,7 +58,31 @@ const routes: Routes = [
           import("./components/brands/brands.component").then(
             (m) => m.BrandsComponent
           ),
-        title: "brands",
+        title: "Brands",
+      },
+      {
+        path: "allorders",
+        loadComponent: () =>
+          import("./components/allorders/allorders.component").then(
+            (m) => m.AllordersComponent
+          ),
+        title: "Allorders",
+      },
+      {
+        path: "payment/:cartId",
+        loadComponent: () =>
+          import("./components/payment/payment.component").then(
+            (m) => m.PaymentComponent
+          ),
+        title: "Payment",
+      },
+      {
+        path: "wishlist",
+        loadComponent: () =>
+          import("./components/wishlist/wishlist.component").then(
+            (m) => m.WishlistComponent
+          ),
+        title: "Wishlist",
       },
     ],
   },

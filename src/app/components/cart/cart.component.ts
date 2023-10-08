@@ -2,11 +2,12 @@ import { Component, OnInit, Renderer2 } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { CartService } from "src/app/services/cart.service";
 import { ToastrService } from "ngx-toastr";
+import { RouterLink } from "@angular/router";
 // import { BehaviorSubject } from "rxjs";
 @Component({
   selector: "app-cart",
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: "./cart.component.html",
   styleUrls: ["./cart.component.css"],
 })
@@ -17,6 +18,7 @@ export class CartComponent implements OnInit {
     private _Renderer2: Renderer2
   ) {}
   cart: any = null;
+  cartId:any=''
   cartProducts: any[] = [];
   ngOnInit(): void {
     this._CartService.getUserCart().subscribe({
@@ -25,10 +27,9 @@ export class CartComponent implements OnInit {
         console.log(response);
         this.cartProducts = response.data.products;
         this._CartService.cartNumber.next(response.numOfCartItems);
+       this.cartId= this._CartService.cartId.next(response.data._id);
       },
     });
-
-  
   }
 
   // remove cart item
@@ -41,8 +42,8 @@ export class CartComponent implements OnInit {
         this.cart = response.data;
         this.cartProducts = response.data.products;
         this._CartService.cartNumber.next(response.numOfCartItems);
-        if(this.cart.totalCartPrice === 0) {
-          this.emptyCart(id)
+        if (this.cart.totalCartPrice === 0) {
+          this.emptyCart(id);
         }
       },
       error: (err) => {
@@ -88,5 +89,5 @@ export class CartComponent implements OnInit {
         }
       },
     });
-  };
+  }
 }

@@ -38,7 +38,10 @@ export class SignupComponent {
     this.isLoading= true
     console.log(registerForm.value);
     if(registerForm.valid) {
+      //
       localStorage.setItem("username",registerForm.value.name);
+      this._AuthService.userName.next(registerForm.value.name);
+      //
       this._AuthService.register(registerForm.value).subscribe({
         next:(res) => {
           if(res.message === "success") {
